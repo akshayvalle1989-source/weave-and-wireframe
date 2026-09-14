@@ -1,24 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, CalendarDays, FileText, MapPin, Radio, ShieldCheck } from "lucide-react";
+import evidence from "@/assets/grama-lekha-evidence.jpg";
+import { Button } from "@/components/button";
+import { LiveStrip, SectionTitle, StatCard, flow } from "@/components/page-blocks";
+import { agendaItems } from "@/lib/demo-data";
+export const Route=createFileRoute("/")({head:()=>({meta:[{title:"Grama Lekha — Digital Social Auditor"},{name:"description",content:"See Panchayat works, join Gram Sabha deliberations and track social audit resolutions."},{property:"og:title",content:"Grama Lekha — Digital Social Auditor"},{property:"og:description",content:"A public participation and social audit portal for Gram Sabhas."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:Home});
+function Home(){return <><LiveStrip/><section className="mx-auto max-w-7xl px-4 py-5 lg:px-8"><div className="relative overflow-hidden rounded-lg bg-primary-container p-6 text-primary-foreground shadow-lg md:p-9"><div className="absolute -right-12 -top-24 size-80 rounded-full border-[32px] border-primary-soft/10"/><div className="relative max-w-4xl"><div className="mb-4 flex flex-wrap gap-2 text-[10px] font-bold uppercase"><span className="rounded-sm bg-secondary px-2 py-1">● Live in session</span><span className="rounded-sm bg-primary px-2 py-1">Code: GS-4821</span><span className="rounded-sm bg-brass-deep px-2 py-1 text-brass">Quorum achieved</span></div><h1 className="font-display text-3xl font-bold md:text-5xl">Today’s Gram Sabha & Social Audit Assembly</h1><p className="mt-3 max-w-3xl text-sm leading-6 text-primary-soft md:text-base">Citizens of Shivpuri Panchayat are convened to verify public works, audit water-supply evidence and record resolutions.</p><div className="mt-6 flex flex-wrap gap-3"><Button variant="civic" size="lg" asChild><Link to="/vote"><Radio className="size-4"/>Participate in Gram Sabha</Link></Button><Button variant="outline" size="lg" asChild><Link to="/gram-sabha">View meeting order</Link></Button></div><div className="mt-6 grid gap-2 text-xs sm:grid-cols-3"><span className="rounded bg-primary/60 p-3"><MapPin className="mb-1 size-4 text-brass"/>Panchayat Bhavan, Ward 4</span><span className="rounded bg-primary/60 p-3"><ShieldCheck className="mb-1 size-4 text-brass"/>Presiding: Rameshwar Prasad</span><span className="rounded bg-primary/60 p-3"><CalendarDays className="mb-1 size-4 text-brass"/>28 October 2025 · 10:00 AM</span></div></div></div></section>
+<section className="mx-auto max-w-7xl px-4 py-7 lg:px-8"><SectionTitle eyebrow="Continuous citizen sovereignty" title="6-Step Citizen Accountability Loop"/><div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-6">{flow.map(([n,t,d,Icon],i)=><article key={t} className={`slab ${i===3?"bg-primary-container text-primary-foreground":""}`}><div className="flex items-center justify-between"><span className="eyebrow">Step {n}</span><Icon className="size-4"/></div><h3 className="mt-4 font-display text-lg font-bold">{t}</h3><p className={`mt-2 text-xs leading-5 ${i===3?"text-primary-soft":"text-muted-foreground"}`}>{d}</p></article>)}</div></section>
+<section className="mx-auto max-w-7xl px-4 py-7 lg:px-8"><SectionTitle eyebrow="Sovereign treasury status" title="Shivpuri Financial & Works Snapshot"/><div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4"><StatCard label="Annual sanction" value="₹48,50,000" note="15th Finance Commission + state grants"/><StatCard label="Disbursed & audited" value="₹34,20,000" note="70.5% utilization · ₹14,30,000 remaining" tone="success"/><StatCard label="Active public works" value="12 Projects" note="6 MGNREGA · 4 Jal Jeevan · 2 solar"/><StatCard label="Social audit queries" value="03 Open" note="2 ward inspections resolved · 1 under debate" tone="alert"/></div></section>
+<section className="mx-auto grid max-w-7xl gap-6 px-4 py-7 lg:grid-cols-[1.7fr_1fr] lg:px-8"><div><SectionTitle eyebrow="Agenda floor" title="Sabha Resolutions Pending Verification"/>{agendaItems.map(a=><article key={a.id} className="slab mb-3"><div className="flex flex-wrap items-center justify-between gap-2"><p className="eyebrow">Agenda #{a.id} · {a.scheme}</p><strong className="text-sm text-primary">{a.amount}</strong></div><h3 className="mt-2 font-display text-lg font-bold">{a.title}</h3><p className="mt-2 text-sm text-muted-foreground">{a.detail}</p><div className="mt-4 flex justify-between gap-3"><span className="rounded-sm bg-accent px-2 py-1 text-xs font-bold">{a.status}</span><Link to="/vote" className="text-xs font-bold text-primary">Deliberate & vote →</Link></div></article>)}</div><aside><SectionTitle eyebrow="Council calendar" title="Sabha Assemblies"/><div className="slab space-y-5"><div><p className="eyebrow">Today · In progress</p><h3 className="mt-1 font-bold">Q3 Sovereign Social Audit Sabha</h3><p className="text-xs text-muted-foreground">Panchayat Bhavan Hall · Code GS-4821</p></div><div><p className="eyebrow">15 Nov 2025</p><h3 className="mt-1 font-bold">Special Winter Agricultural Sabha</h3></div><Button variant="quiet" className="w-full" asChild><Link to="/results"><FileText className="size-4"/>View signed minutes</Link></Button></div></aside></section>
+<section className="mx-auto max-w-7xl px-4 py-7 lg:px-8"><SectionTitle eyebrow="Physical audit trail" title="On-Ground Verification Evidence" action={<Link to="/social-audit" className="text-xs font-bold text-primary">Browse complete dossier <ArrowRight className="inline size-4"/></Link>}/><div className="grid overflow-hidden rounded-lg border border-border bg-card md:grid-cols-3">{[0,1,2].map((i)=><figure key={i} className="border-b border-border md:border-b-0 md:border-r last:border-0"><div className="h-52 overflow-hidden"><img src={evidence} alt={["Water installation field inspection","Citizens assembled beneath a banyan tree","Solar-equipped public health centre"][i]} className="h-full w-[300%] max-w-none object-cover" style={{transform:`translateX(-${i*33.333}%)`}} width={1536} height={864} loading="lazy"/></div><figcaption className="p-4"><p className="eyebrow">{["Asset verified","Public hearing","Inspection pending"][i]}</p><p className="mt-1 font-bold">{["Borewell Installation Ward 2","Community Muster Verification","PHC 5kW Solar Array"][i]}</p></figcaption></figure>)}</div></section></>}
