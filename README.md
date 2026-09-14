@@ -1,19 +1,8 @@
-# Website Blueprint Builder
 
-ive attached zip and md file of my prd . design my website using both these docs and ensure all the links tabs are working properly
 
-This project was built with [Lovable](https://lovable.dev).
+**Live app**:https://gramalekha.lovable.app/
 
-**Live app**: https://weave-and-wireframe.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/7b0a8677-765e-41eb-aa94-4c4b716e288f).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
+Gramalekha is an open-source civic platform designed to modernize rural local governance for Gram Panchayats. Its primary function is to facilitate transparent digital social audits and secure e-ballots for Gram Sabha resolutions, ensuring durable public record-keeping. The project embeds ethical principles directly into its design by decoupling identity verification from public ballots to safeguard participant privacy. By powering the social audit pillar of governance, Gramalekha bridges administrative transparency with active participatory democracy, enabling citizens to hold authorities accountable through verifiable digital consensus.
 ## Development
 
 Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
