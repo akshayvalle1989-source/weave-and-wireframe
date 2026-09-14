@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GramSabhaRouteImport } from './routes/gram-sabha'
+import { Route as HelpRouteImport } from './routes/help'
 import { Route as PanchayatRouteImport } from './routes/panchayat'
+import { Route as ResultsRouteImport } from './routes/results'
 import { Route as SocialAuditRouteImport } from './routes/social-audit'
 import { Route as VoteRouteImport } from './routes/vote'
 
@@ -25,9 +27,19 @@ const GramSabhaRoute = GramSabhaRouteImport.update({
   path: '/gram-sabha',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PanchayatRoute = PanchayatRouteImport.update({
   id: '/panchayat',
   path: '/panchayat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResultsRoute = ResultsRouteImport.update({
+  id: '/results',
+  path: '/results',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SocialAuditRoute = SocialAuditRouteImport.update({
@@ -44,14 +56,18 @@ const VoteRoute = VoteRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/gram-sabha': typeof GramSabhaRoute
+  '/help': typeof HelpRoute
   '/panchayat': typeof PanchayatRoute
+  '/results': typeof ResultsRoute
   '/social-audit': typeof SocialAuditRoute
   '/vote': typeof VoteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/gram-sabha': typeof GramSabhaRoute
+  '/help': typeof HelpRoute
   '/panchayat': typeof PanchayatRoute
+  '/results': typeof ResultsRoute
   '/social-audit': typeof SocialAuditRoute
   '/vote': typeof VoteRoute
 }
@@ -59,23 +75,48 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/gram-sabha': typeof GramSabhaRoute
+  '/help': typeof HelpRoute
   '/panchayat': typeof PanchayatRoute
+  '/results': typeof ResultsRoute
   '/social-audit': typeof SocialAuditRoute
   '/vote': typeof VoteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/gram-sabha' | '/panchayat' | '/social-audit' | '/vote'
+  fullPaths:
+    | '/'
+    | '/gram-sabha'
+    | '/help'
+    | '/panchayat'
+    | '/results'
+    | '/social-audit'
+    | '/vote'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/gram-sabha' | '/panchayat' | '/social-audit' | '/vote'
+  to:
+    | '/'
+    | '/gram-sabha'
+    | '/help'
+    | '/panchayat'
+    | '/results'
+    | '/social-audit'
+    | '/vote'
   id:
-    '__root__' | '/' | '/gram-sabha' | '/panchayat' | '/social-audit' | '/vote'
+    | '__root__'
+    | '/'
+    | '/gram-sabha'
+    | '/help'
+    | '/panchayat'
+    | '/results'
+    | '/social-audit'
+    | '/vote'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GramSabhaRoute: typeof GramSabhaRoute
+  HelpRoute: typeof HelpRoute
   PanchayatRoute: typeof PanchayatRoute
+  ResultsRoute: typeof ResultsRoute
   SocialAuditRoute: typeof SocialAuditRoute
   VoteRoute: typeof VoteRoute
 }
@@ -96,11 +137,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GramSabhaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/panchayat': {
       id: '/panchayat'
       path: '/panchayat'
       fullPath: '/panchayat'
       preLoaderRoute: typeof PanchayatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/results': {
+      id: '/results'
+      path: '/results'
+      fullPath: '/results'
+      preLoaderRoute: typeof ResultsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/social-audit': {
@@ -123,7 +178,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GramSabhaRoute: GramSabhaRoute,
+  HelpRoute: HelpRoute,
   PanchayatRoute: PanchayatRoute,
+  ResultsRoute: ResultsRoute,
   SocialAuditRoute: SocialAuditRoute,
   VoteRoute: VoteRoute,
 }
