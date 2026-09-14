@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GramSabhaRouteImport } from './routes/gram-sabha'
 import { Route as PanchayatRouteImport } from './routes/panchayat'
+import { Route as SocialAuditRouteImport } from './routes/social-audit'
+import { Route as VoteRouteImport } from './routes/vote'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +30,54 @@ const PanchayatRoute = PanchayatRouteImport.update({
   path: '/panchayat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SocialAuditRoute = SocialAuditRouteImport.update({
+  id: '/social-audit',
+  path: '/social-audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VoteRoute = VoteRouteImport.update({
+  id: '/vote',
+  path: '/vote',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/gram-sabha': typeof GramSabhaRoute
   '/panchayat': typeof PanchayatRoute
+  '/social-audit': typeof SocialAuditRoute
+  '/vote': typeof VoteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/gram-sabha': typeof GramSabhaRoute
   '/panchayat': typeof PanchayatRoute
+  '/social-audit': typeof SocialAuditRoute
+  '/vote': typeof VoteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/gram-sabha': typeof GramSabhaRoute
   '/panchayat': typeof PanchayatRoute
+  '/social-audit': typeof SocialAuditRoute
+  '/vote': typeof VoteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/gram-sabha' | '/panchayat'
+  fullPaths: '/' | '/gram-sabha' | '/panchayat' | '/social-audit' | '/vote'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/gram-sabha' | '/panchayat'
-  id: '__root__' | '/' | '/gram-sabha' | '/panchayat'
+  to: '/' | '/gram-sabha' | '/panchayat' | '/social-audit' | '/vote'
+  id:
+    '__root__' | '/' | '/gram-sabha' | '/panchayat' | '/social-audit' | '/vote'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GramSabhaRoute: typeof GramSabhaRoute
   PanchayatRoute: typeof PanchayatRoute
+  SocialAuditRoute: typeof SocialAuditRoute
+  VoteRoute: typeof VoteRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +103,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PanchayatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/social-audit': {
+      id: '/social-audit'
+      path: '/social-audit'
+      fullPath: '/social-audit'
+      preLoaderRoute: typeof SocialAuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vote': {
+      id: '/vote'
+      path: '/vote'
+      fullPath: '/vote'
+      preLoaderRoute: typeof VoteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +124,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GramSabhaRoute: GramSabhaRoute,
   PanchayatRoute: PanchayatRoute,
+  SocialAuditRoute: SocialAuditRoute,
+  VoteRoute: VoteRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
