@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GramSabhaRouteImport } from './routes/gram-sabha'
+import { Route as PanchayatRouteImport } from './routes/panchayat'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GramSabhaRoute = GramSabhaRouteImport.update({
+  id: '/gram-sabha',
+  path: '/gram-sabha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PanchayatRoute = PanchayatRouteImport.update({
+  id: '/panchayat',
+  path: '/panchayat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/gram-sabha': typeof GramSabhaRoute
+  '/panchayat': typeof PanchayatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/gram-sabha': typeof GramSabhaRoute
+  '/panchayat': typeof PanchayatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/gram-sabha': typeof GramSabhaRoute
+  '/panchayat': typeof PanchayatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/gram-sabha' | '/panchayat'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/gram-sabha' | '/panchayat'
+  id: '__root__' | '/' | '/gram-sabha' | '/panchayat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GramSabhaRoute: typeof GramSabhaRoute
+  PanchayatRoute: typeof PanchayatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gram-sabha': {
+      id: '/gram-sabha'
+      path: '/gram-sabha'
+      fullPath: '/gram-sabha'
+      preLoaderRoute: typeof GramSabhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/panchayat': {
+      id: '/panchayat'
+      path: '/panchayat'
+      fullPath: '/panchayat'
+      preLoaderRoute: typeof PanchayatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GramSabhaRoute: GramSabhaRoute,
+  PanchayatRoute: PanchayatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
